@@ -1,0 +1,39 @@
+1. Commands to run when you clone a Laravel repository from github
+In the directory of your application run 
+
+a) composer install
+b) npm install
+c) php artisan key:generate
+d) php artisan migrate
+e) php artisan db:seed
+
+Relevant tutorials
+Youtube: Laravel 10- CRUD Application Tutorial
+
+When working with Laravel, these are the steps you could follow;
+
+1. Create migrations - php artisan make:migration create_staff_table
+
+OR php artisan make:model Staff -m
+
+2. Define your migration
+
+3. Perform the migrations operation - php artisan migrate
+
+4. Make a controller in which all CRUD functionalities will be defined
+
+	php artisan make:Controller StaffController --resource
+
+	the --resource adds all relevant CRUD functions automatically for you
+	
+	-clashing of routes
+
+5. What is the model; relationships eg belongsTo, hasOne, hasMany
+
+6. CRUD operations and create, index, show and edit
+
+7. Routes 
+
+Others...
+Resource storage i.e. images stored under public/assets/
+php artisan migrate:fresh --seed
