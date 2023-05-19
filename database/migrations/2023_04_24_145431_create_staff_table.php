@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('staff_email');
             $table->string('staff_phone');
             $table->string('staff_role');
+            $table->integer('salary');
+            $table->date('hiring_date');
             $table->timestamps();
         });
     }

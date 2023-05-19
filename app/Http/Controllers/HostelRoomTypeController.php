@@ -35,6 +35,7 @@ class HostelRoomTypeController extends Controller
         $attributes = request()->validate([
             'category' => 'required|max:255|unique:hostel_room_types,room_type',
             'price' => 'required|numeric|',
+            'capacity' => 'required|numeric|',
             'description' => 'required|max:255',
             'photo' => 'required|image',
         ]);
@@ -46,6 +47,7 @@ class HostelRoomTypeController extends Controller
         HostelRoomType::create([
             'room_type' => $attributes['category'],
             'room_price' => $attributes['price'],
+            'room_capacity' => $attributes['capacity'],
             'room_description' => $attributes['description'],
             'room_type_photo' => $attributes['photo'],
         ]);
@@ -87,19 +89,25 @@ class HostelRoomTypeController extends Controller
         $attributes = request()->validate([
             'category' => 'required|max:255|unique:hostel_room_types,room_type,' . $id,
             'price' => 'required|numeric|',
+            'capacity' => 'required|numeric|',
             'description' => 'required|max:255',
-            'photo' => 'required|image',
+            'photo' => 'sometimes|image',
         ], [
             'photo.image' => 'The file must be an image (jpeg, png, bmp, gif, or svg)',
         ]);
 
-        $fileName = time() . $request->file('photo')->getClientOriginalName();
-        $path = $request->file('photo')->storeAs('images', $fileName, 'public');
-        $attributes['photo'] = '/storage/' . $path;
-
-        $hostelRoomType->room_type = $request->category;
-        $hostelRoomType->room_price = $request->price;
-        $hostelRoomType->room_description = $request->description;
+        if (!isset($attributes['photo'])) {
+            // If the "photo" field is not set, use the existing photo from the database
+            $attributes['photo'] = $hostelRoomType->room_type_photo;
+        } else {
+            $fileName = time() . $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('images', $fileName, 'public');
+            $attributes['photo'] = '/storage/' . $path;
+        }
+        $hostelRoomType->room_type = $attributes['category'];
+        $hostelRoomType->room_price = $attributes['price'];
+        $hostelRoomType->room_capacity = $attributes['capacity'];
+        $hostelRoomType->room_description = $attributes['description'];
         $hostelRoomType->room_type_photo = $attributes['photo'];
         $hostelRoomType->save();
 
@@ -118,7 +126,10 @@ class HostelRoomTypeController extends Controller
         if ($unassignedRoomType) {
             DB::table('hostel_rooms')
                 ->where('hostel_room_type_id', $hostelRoomType->id)
-                ->update(['hostel_room_type_id' => $unassignedRoomType->id]);
+                ->update([
+                    'hostel_room_type_id' => $unassignedRoomType->id,
+                    'status' => 'Unavailable'
+                ]);
         }
 
         HostelRoomType::destroy($id);
@@ -139,14 +150,13 @@ class HostelRoomTypeController extends Controller
             'room_number' => 'required|max:4|regex:/^[A-Z][0-9]{0,3}$/|unique:hostel_rooms,room_number',
             'floor_level' => 'required|max:255',
             'room_type' => 'required|max:255',
-            'bed_space' => 'required|max:255',
             'status' => 'required|max:255',
         ]);
 
 
 
         //Query database to find the id of the room type
-        $roomTypeId = DB::table('hostel_room_types')
+        $roomType = DB::table('hostel_room_types')
             ->where('room_type', '=', "$request->room_type")
             ->select('id')
             ->first();
@@ -154,12 +164,12 @@ class HostelRoomTypeController extends Controller
         HostelRoom::create([
             'room_number' => $attributes['room_number'],
             'floor_level' => $attributes['floor_level'],
-            'bed_space' => $attributes['bed_space'],
+            'bed_space' => $roomType->room_capacity,
             'status' => $attributes['status'],
-            'hostel_room_type_id' => $roomTypeId->id
+            'hostel_room_type_id' => $roomType->id
         ]);
 
 
-        return redirect("categories/$roomTypeId->id/")->with('flash_message', 'Hostel Room Added!');
+        return redirect("categories/$roomType->id/")->with('flash_message', 'Hostel Room Added!');
     }
 }

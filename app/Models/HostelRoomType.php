@@ -9,7 +9,7 @@ class HostelRoomType extends Model
 {
     protected $table = 'hostel_room_types';
     protected $primaryKey = 'id';
-    protected $fillable = ['room_type', 'room_price', 'room_description','room_type_photo'];
+    protected $fillable = ['room_type', 'room_price','room_capacity', 'room_description','room_type_photo'];
 
     public function hostelRoom(){
         return $this->hasMany(HostelRoom::class);

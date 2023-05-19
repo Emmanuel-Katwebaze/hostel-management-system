@@ -55,6 +55,14 @@
                                         <p class='text-danger inputerror'>{{ $message }} </p>
                                     @enderror
                                 </div>
+                                <div class="mb-3 col-md-9">
+                                    <label class="form-label">Capacity</label>
+                                    <input type="number" name="capacity" class="form-control border border-2 p-2"
+                                        value='{{ old('capacity', $hostelRoomType->room_capacity) }}'>
+                                    @error('capacity')
+                                        <p class='text-danger inputerror'>{{ $message }} </p>
+                                    @enderror
+                                </div>
 
                                 <div class="mb-3 col-md-9">
                                     <label class="form-label">Description</label>

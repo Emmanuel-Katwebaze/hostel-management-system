@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-Use Str;
-Use Hash;
+use Str;
+use Hash;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class SessionsController extends Controller
             'password' => 'required'
         ]);
 
-        if (! auth()->attempt($attributes)) {
+        if (!auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
                 'email' => 'Your provided credentials could not be verified.'
             ]);
@@ -32,11 +32,15 @@ class SessionsController extends Controller
 
         session()->regenerate();
 
-        return redirect('categories');
+        if (auth()->user()->is_admin) {
+            return redirect('/categories');
+        }
 
+        return redirect('/guest');
     }
 
-    public function show(){
+    public function show()
+    {
         request()->validate([
             'email' => 'required|email',
         ]);
@@ -46,12 +50,12 @@ class SessionsController extends Controller
         );
 
         return $status === Password::RESET_LINK_SENT
-                    ? back()->with(['status' => __($status)])
-                    : back()->withErrors(['email' => __($status)]);
-
+            ? back()->with(['status' => __($status)])
+            : back()->withErrors(['email' => __($status)]);
     }
 
-    public function update(){
+    public function update()
+    {
 
         request()->validate([
             'token' => 'required',
@@ -73,15 +77,17 @@ class SessionsController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withErrors(['email' => [__($status)]]);
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
     }
 
     public function destroy()
     {
         auth()->logout();
 
+        session()->invalidate();
+        session()->regenerateToken();
+
         return redirect('/sign-in');
     }
-
 }

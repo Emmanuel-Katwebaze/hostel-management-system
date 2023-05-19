@@ -78,6 +78,20 @@
                                         <p class='text-danger inputerror'>{{ $message }} </p>
                                     @enderror
                                 </div>
+                                <div class="mb-3 col-md-9">
+                                    <label class="form-label">Salary</label>
+                                    <input type="number" name="salary" class="form-control border border-2 p-2">
+                                    @error('salary')
+                                        <p class='text-danger inputerror'>{{ $message }} </p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-9">
+                                    <label class="form-label">Hiring Date</label>
+                                    <input type="date" name="hiring_date" class="form-control border border-2 p-2">
+                                    @error('hiring_date')
+                                        <p class='text-danger inputerror'>{{ $message }} </p>
+                                    @enderror
+                                </div>
                             </div>
                             <button type="submit" class="btn bg-gradient-dark">Submit</button>
                         </form>

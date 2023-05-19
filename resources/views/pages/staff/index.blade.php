@@ -58,8 +58,10 @@
                                                 ROLE</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                CREATION DATE
-                                            </th>
+                                                SALARY</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                HIRING_DATE</th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
@@ -89,7 +91,11 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-secondary text-xs font-weight-bold">{{ $item->created_at }}</span>
+                                                        class="text-secondary text-xs font-weight-bold">{{ $item->salary }}</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-secondary text-xs font-weight-bold">{{ $item->hiring_date }}</span>
                                                 </td>
                                                 <td class="align-middle">
                                                     <a rel="tooltip" class="btn btn-success btn-link"

@@ -8,7 +8,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('hostel-room-categories') }} ">
             <img src="{{ asset('assets') }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-2 font-weight-bold text-white">Hostel Management Admin Dashboard</span>
+            <span class="ms-2 font-weight-bold text-white">Ideal Hostel Admin Dashboard</span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -29,8 +29,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'user-management' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('user-management') }}">
+                <a class="nav-link text-white {{ $activePage == 'tenant' ? ' active bg-gradient-primary' : '' }} "
+                    href="{{ route('tenant') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">hotel</i>
                     </div>
@@ -71,7 +71,8 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Facilities</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white">
+                <a class="nav-link text-white {{ $activePage == 'facilities' ? ' active bg-gradient-primary' : '' }}"
+                    href="{{ route('facilities')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">holiday_village</i>
                     </div>
@@ -83,6 +84,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'hostel-expenses' ? ' active bg-gradient-primary' : '' }} "
+                    href="{{route('expenses')}}"
                     >
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">payments</i>
@@ -91,54 +93,24 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'hostel-bookings' ? ' active bg-gradient-primary' : '' }} "
-                    >
+                <a class="nav-link text-white {{ $activePage == 'hostel_booking' ? ' active bg-gradient-primary' : '' }} "
+                href="{{ route('hostel_booking') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">money</i>
                     </div>
-                    <span class="nav-link-text ms-1">Hostel Bookings</span>
-                </a>
-            </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'profile' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('profile') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
+                    <span class="nav-link-text ms-1">Hostel Booking</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="{{ route('static-sign-in') }}">
+                <a class="nav-link text-white {{ $activePage == 'guest-booking' ? ' active bg-gradient-primary' : '' }} "
+                href="{{ route('guest-booking') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">login</i>
+                        <i class="material-icons opacity-10">money</i>
                     </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="{{ route('static-sign-up') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">assignment</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign Up</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('notifications') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">notifications</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Notifications</span>
+                    <span class="nav-link-text ms-1">Guest Booking</span>
                 </a>
             </li>
         </ul>
     </div>
-    {{-- <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-    </div> --}}
+
 </aside>

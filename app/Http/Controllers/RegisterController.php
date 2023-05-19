@@ -23,6 +23,10 @@ class RegisterController extends Controller
         $user = User::create($attributes);
         auth()->login($user);
 
-        return redirect('hostel-rooms');
+        if (auth()->user()->is_admin) {
+            return redirect('/categories');
+        }
+
+        return redirect('/guest');
     }
 }

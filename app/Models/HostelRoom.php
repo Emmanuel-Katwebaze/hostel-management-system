@@ -15,5 +15,13 @@ class HostelRoom extends Model
         return $this->belongsTo(HostelRoomType::class);
     }
 
+    public function hostelBooking(){
+        return $this->hasMany(HostelRoomBooking::class);
+    }
+
+    public function guestBooking(){
+        return $this->hasOne(GuestBooking::class);
+    }
+
     use HasFactory;
 }

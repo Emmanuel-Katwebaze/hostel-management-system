@@ -38,6 +38,7 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
     {{-- General CSS --}}
+
     <link href="{{ asset('assets') }}/css/styles.css" rel="stylesheet">
     {{-- Animate CSS Library --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -69,6 +70,7 @@
             toast.classList.remove('show');
         }, 5000);
     </script>
+
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

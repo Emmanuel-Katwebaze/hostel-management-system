@@ -35,14 +35,18 @@ class StaffController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:staff,staff_email',
             'phone' => 'required|max:10',
-            'role' => 'required:max:150'
+            'role' => 'required:max:150',
+            'salary' => 'required|numeric',
+            'hiring_date' => 'required|date'
         ]);
 
         Staff::create([
             'staff_name' => $attributes['name'],
             'staff_email' => $attributes['email'],
             'staff_phone' => $attributes['phone'],
-            'staff_role' => $attributes['role']
+            'staff_role' => $attributes['role'],
+            'salary' => $attributes['salary'],
+            'hiring_date' => $attributes['hiring_date']
         ]);
 
         return redirect('staff')->with('flash_message', 'Staff Added!');
@@ -75,7 +79,9 @@ class StaffController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:staff,staff_email,' . $id,
             'phone' => 'required|max:10',
-            'role' => 'required:max:150'
+            'role' => 'required:max:150',
+            'salary' => 'required|numeric',
+            'hiring_date' => 'required|date'
         ]);
         //dd($attributes);
         // $staff->update($attributes);
@@ -83,6 +89,8 @@ class StaffController extends Controller
         $staff->staff_email = $request->email;
         $staff->staff_phone = $request->phone;
         $staff->staff_role = $request->role;
+        $staff->salary = $request->salary;
+        $staff->hiring_date = $request->hiring_date;
         $staff->save();
         return redirect('staff')->with('flash_message', 'Staff Updated');
     }

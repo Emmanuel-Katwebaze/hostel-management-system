@@ -39,28 +39,27 @@ class HostelRoomController extends Controller
             'room_number' => 'required|max:4|regex:/^[A-Z][0-9]{0,3}$/|unique:hostel_rooms,room_number',
             'floor_level' => 'required|max:255',
             'room_type' => 'required|max:255',
-            'bed_space' => 'required|max:255',
             'status' => 'required|max:255',
         ]);
 
 
 
         //Query database to find the id of the room type
-        $roomTypeId = DB::table('hostel_room_types')
+        $roomType = DB::table('hostel_room_types')
             ->where('room_type', '=', "$request->room_type")
-            ->select('id')
+            ->select('*')
             ->first();
 
         HostelRoom::create([
             'room_number' => $attributes['room_number'],
             'floor_level' => $attributes['floor_level'],
-            'bed_space' => $attributes['bed_space'],
+            'bed_space' => $roomType->room_capacity,
             'status' => $attributes['status'],
-            'hostel_room_type_id' => $roomTypeId->id
+            'hostel_room_type_id' => $roomType->id
         ]);
 
 
-        return redirect('categories/' . $roomTypeId->id)->with('flash_message', 'Hostel Room Added!');
+        return redirect('categories/' . $roomType->id)->with('flash_message', 'Hostel Room Added!');
     }
 
     /**
@@ -93,21 +92,20 @@ class HostelRoomController extends Controller
             'room_number' => 'required|max:4|regex:/^[A-Z][0-9]{0,3}$/|unique:hostel_rooms,room_number,' . $id,
             'floor_level' => 'required|max:255',
             'room_type' => 'required|max:255',
-            'bed_space' => 'required|max:255',
             'status' => 'required|max:255',
         ]);
 
         //Query database to find the id of the new room type
-        $newRoomTypeId = DB::table('hostel_room_types')
+        $newRoomType = DB::table('hostel_room_types')
             ->where('room_type', '=', "$request->room_type")
-            ->select('id')
+            ->select('*')
             ->first();
 
         $hostelRoom->room_number = $request->room_number;
         $hostelRoom->floor_level = $request->floor_level;
-        $hostelRoom->bed_space = $request->bed_space;
+        $hostelRoom->bed_space = $newRoomType->room_capacity;
         $hostelRoom->status = $request->status;
-        $hostelRoom->hostel_room_type_id = $newRoomTypeId->id;
+        $hostelRoom->hostel_room_type_id = $newRoomType->id;
         $hostelRoom->save();
 
         return redirect('hostel-rooms')->with('flash_message', 'Hostel Room Updated');

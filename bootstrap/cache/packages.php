@@ -1,4 +1,22 @@
 <?php return array (
+  'bmatovu/laravel-mtn-momo' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Bmatovu\\MtnMomo\\MtnMomoServiceProvider',
+    ),
+  ),
+  'cartalyst/stripe-laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Cartalyst\\Stripe\\Laravel\\StripeServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Stripe' => 'Cartalyst\\Stripe\\Laravel\\Facades\\Stripe',
+    ),
+  ),
   'laravel-frontend-presets/material-dashboard' => 
   array (
     'providers' => 

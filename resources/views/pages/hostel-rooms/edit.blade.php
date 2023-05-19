@@ -90,44 +90,6 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-9">
-                                    <label class="form-label">Bed Space</label>
-                                    <div class="form-control">
-                                        <div class="form-check form-check-inline p-2">
-                                            @if ($hostelRoom->bed_space == '1')
-                                                <input class="form-check-input" type="radio" name="bed_space"
-                                                    value="1" checked>
-                                            @else
-                                                <input class="form-check-input" type="radio" name="bed_space"
-                                                    value="1">
-                                            @endif
-                                            <label class="form-check-label">One</label>
-                                        </div>
-                                        <div class="form-check form-check-inline p-2">
-                                            @if ($hostelRoom->bed_space == '2')
-                                                <input class="form-check-input" type="radio" name="bed_space"
-                                                    value="2" checked>
-                                            @else
-                                                <input class="form-check-input" type="radio" name="bed_space"
-                                                    value="2">
-                                            @endif
-                                            <label class="form-check-label">Two</label>
-                                        </div>
-                                        <div class="form-check form-check-inline p-2">
-                                            @if ($hostelRoom->bed_space == 'None')
-                                                <input class="form-check-input" type="radio" name="bed_space"
-                                                    value="None" checked>
-                                            @else
-                                                <input class="form-check-input" type="radio" name="bed_space"
-                                                    value="None">
-                                            @endif
-                                            <label class="form-check-label">None</label>
-                                        </div>
-                                    </div>
-                                    @error('bed_space')
-                                        <p class='text-danger inputerror'>{{ $message }} </p>
-                                    @enderror
-                                </div>
-                                <div class="mb-3 col-md-9">
                                     <label class="form-label">Status</label>
                                     <div class="form-control">
                                         <div class="form-check form-check-inline p-2">

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('room_number')->unique();
             $table->string('floor_level');
-            $table->string('bed_space');
+            $table->integer('bed_space');
             $table->string('status');
             $table->unsignedBigInteger('hostel_room_type_id'); //foreign key column,
             $table->timestamps();
