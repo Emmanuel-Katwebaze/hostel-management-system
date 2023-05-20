@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-    # Made with love by GROUP ONE BSSE II
+    # Made with love 
 </p>
 
 ## About Laravel
